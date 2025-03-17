@@ -2,7 +2,7 @@
 This Python Scripts pings a network external server and provides data on the Network Availability
 
 ## How it works
-The check_network_availability() function now uses subprocess.run() to ping an external server (default: "8.8.8.8").
+The check_network_availability() function uses subprocess.run() to ping an external server (default: "8.8.8.8").
 It handles both Windows (-n) and Unix-like systems (-c) for compatibility.
 A 5-second timeout is set for each ping attempt.
 
@@ -23,9 +23,9 @@ Availability is calculated as a percentage of uptime
 ## Customization
 Target Server: Replace "8.8.8.8" with the IP or hostname you want to monitor.
 
-Ping Frequency: The script pings every minute (controlled by schedule.every(1).minutes). Adjust this in the scheduling section if needed (e.g., every(5).minutes).
+Ping Frequency: The script pings every minute (controlled by schedule.every(1).minutes). This can be adjusted in the scheduling section if needed (e.g., every(5).minutes).
 
-Timeout: The timeout=5 means it waits 5 seconds for a response. Adjust this based on your needs.
+Timeout: The timeout=5 means it waits 5 seconds for a response. Also adjustable based on the needs.
 
 ## Testing
 Run the script.
