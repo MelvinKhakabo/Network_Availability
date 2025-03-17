@@ -6,12 +6,14 @@ import csv
 from datetime import timedelta
 import subprocess  # For ping functionality
 
-# Create directories for reports if they don't exist
+# Create directories for reports 
 if not os.path.exists('weekly_reports'):
     os.makedirs('weekly_reports')
 if not os.path.exists('monthly_reports'):
     os.makedirs('monthly_reports')
 
+# Function to check network availability
+# Returns a dictionary with timestamp and status (1 = up, 0 = down)
 def check_network_availability():
     timestamp = datetime.datetime.now()
     target_server = "8.8.8.8"  # Replace with your target server (e.g., "your.server.com")
@@ -26,6 +28,8 @@ def check_network_availability():
     
     return {'timestamp': timestamp, 'status': status}
 
+# Function to collect data and write to daily log
+# Runs every minute between 7 AM and 7 PM, Monday - Friday
 def collect_data():
     current_time = datetime.datetime.now()
     # Check if current time is within 7 AM - 7 PM, Monday - Friday
@@ -40,6 +44,8 @@ def collect_data():
             writer = csv.writer(f)
             writer.writerow([result['timestamp'], result['status']])
 
+# Function to generate weekly report
+# Runs every Friday at 7 PM
 def generate_weekly_report():
     current_time = datetime.datetime.now()
     # Run on Friday at 7 PM
@@ -70,6 +76,8 @@ def generate_weekly_report():
                 f.write(f"Period: {week_start} to {current_time}\n")
                 f.write(f"Availability: {availability:.2f}%\n")
 
+# Function to generate monthly report
+# Runs on the last Friday of the month at 7 PM
 def generate_monthly_report():
     current_time = datetime.datetime.now()
     # Run on last Friday of the month at 7 PM
